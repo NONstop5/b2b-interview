@@ -1,7 +1,7 @@
 <?php
 
 class Figure {
-    protected $isBlack;
+    protected bool $isBlack;
 
     public function __construct($isBlack) {
         $this->isBlack = $isBlack;
@@ -10,5 +10,10 @@ class Figure {
     /** @noinspection PhpToStringReturnInspection */
     public function __toString() {
         throw new \Exception("Not implemented");
+    }
+
+    public function isBlack(): bool
+    {
+        return $this->isBlack;
     }
 }

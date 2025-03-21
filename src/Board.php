@@ -41,15 +41,22 @@ class Board {
         $this->figures['h'][8] = new Rook(true);
     }
 
-    public function move($move) {
+    public function move(string $move, bool $isBlackMove) {
         if (!preg_match('/^([a-h])(\d)-([a-h])(\d)$/', $move, $match)) {
-            throw new \Exception("Incorrect move");
+            throw new Exception("Incorrect move");
         }
 
         $xFrom = $match[1];
         $yFrom = $match[2];
         $xTo   = $match[3];
         $yTo   = $match[4];
+
+        /** @var Figure $figure */
+        $figure = $this->figures[$xFrom][$yFrom];
+
+        if ($figure->isBlack() !== $isBlackMove) {
+            throw new Exception("Incorrect move order");
+        }
 
         if (isset($this->figures[$xFrom][$yFrom])) {
             $this->figures[$xTo][$yTo] = $this->figures[$xFrom][$yFrom];

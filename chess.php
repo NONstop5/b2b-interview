@@ -8,8 +8,10 @@ try {
     $args = $argv;
     array_shift($args);
 
-    foreach ($args as $move) {
-        $board->move($move);
+    foreach ($args as $key => $move) {
+        $isBlackMove = $key % 2 !== 0;
+
+        $board->move($move, $isBlackMove);
     }
 
     $board->dump();
